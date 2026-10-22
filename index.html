@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Secure Auth System</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="auth-container">
+    <div class="brand-header">
+      <div class="logo">🔐</div>
+      <h2>Auth Portal</h2>
+      <p id="sub-title">Create an account to get started</p>
+    </div>
+
+    <!-- Alert Banner -->
+    <div id="alert" class="alert hidden"></div>
+
+    <!-- Tab Buttons -->
+    <div class="tab-buttons" id="tab-buttons">
+      <button class="tab-btn active" onclick="switchTab('register')">Register</button>
+      <button class="tab-btn" onclick="switchTab('login')">Login</button>
+    </div>
+
+    <!-- 1. REGISTER FORM -->
+    <form id="register-form" class="auth-form" onsubmit="handleRegister(event)">
+      <div class="input-group">
+        <label>Email or Phone Number</label>
+        <input type="text" id="reg-identifier" placeholder="e.g. user@example.com or +919876543210" required>
+      </div>
+      <div class="input-group">
+        <label>Password</label>
+        <input type="password" id="reg-password" placeholder="••••••••" required>
+      </div>
+      <button type="submit" class="submit-btn">Send OTP & Register</button>
+    </form>
+
+    <!-- 2. OTP VERIFICATION FORM -->
+    <form id="otp-form" class="auth-form hidden" onsubmit="handleVerifyOTP(event)">
+      <div class="input-group">
+        <label>Enter 6-Digit OTP</label>
+        <input type="text" id="otp-code" placeholder="123456" maxlength="6" required class="otp-input">
+      </div>
+      <div id="demo-otp-box" class="demo-otp-box hidden">
+        <span>Terminal Demo OTP: </span><strong id="demo-otp-val"></strong>
+      </div>
+      <button type="submit" class="submit-btn">Verify Account</button>
+      <button type="button" class="back-btn" onclick="resetToRegister()">← Back to Register</button>
+    </form>
+
+    <!-- 3. LOGIN FORM -->
+    <form id="login-form" class="auth-form hidden" onsubmit="handleLogin(event)">
+      <div class="input-group">
+        <label>Email or Phone Number</label>
+        <input type="text" id="login-identifier" placeholder="e.g. user@example.com or +919876543210" required>
+      </div>
+      <div class="input-group">
+        <label>Password</label>
+        <input type="password" id="login-password" placeholder="••••••••" required>
+      </div>
+      <button type="submit" class="submit-btn">Login</button>
+    </form>
+
+    <!-- 4. DASHBOARD / PROFILE (AFTER LOGIN) -->
+    <div id="dashboard" class="dashboard hidden">
+      <div class="user-card">
+        <h3>Welcome Back! 🎉</h3>
+        <p class="status-badge">✅ Verified Account</p>
+        <div class="details">
+          <p><strong>User ID:</strong> <span id="user-id"></span></p>
+          <p><strong>Registered Identifier:</strong> <span id="user-identifier"></span></p>
+        </div>
+        <button onclick="handleLogout()" class="logout-btn">Logout</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
